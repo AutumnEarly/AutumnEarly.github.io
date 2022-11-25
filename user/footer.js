@@ -1,11 +1,14 @@
 
 (function(){
     var footerUser = document.querySelector('#footer-wrap');
-    var runtime = document.createElement('div');
+    var runtime = document.createElement('div'); //计量网站建立时间
+    var noteLeft = document.createElement('div'); //留言条
     runtime.id = "runtime";
+    noteLeft.innerHTML="这个网站才开始搭建，功能大部分都没有实现~";
     //初始化
     window.addEventListener('DOMContentLoaded',() => {
         footerUser.appendChild(runtime);
+        footerUser.appendChild(noteLeft);
         nowRuntime();
     })
 
@@ -33,7 +36,8 @@
         //防止本地域名中跳转页面时丢失 如果页脚中没有计天数 那么就添加进去
         if(document.querySelector('#footer-wrap').querySelector('#runtime') === null)
         {
-            document.querySelector('#footer-wrap').appendChild(footerUser);
+            document.querySelector('#footer-wrap').appendChild(runtime);
+            document.querySelector('#footer-wrap').appendChild(noteLeft);
         }
         // console.log(document.querySelector('#footer-wrap').querySelector('#runtime'));
     }
