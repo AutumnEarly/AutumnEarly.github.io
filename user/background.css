@@ -1,0 +1,20 @@
+/* 文章页背景 */
+.layout_post>#post {
+    /* 以下代表透明度为0.5 可以自行修改*/
+    background: rgba(170, 230, 230, 0.799);
+}
+
+/* 所有页面背景 */
+#aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{
+    /* 以下代表透明度为0.5 */
+    background: rgba(255,255,255,.5);
+}
+
+#footer {
+    background-color: transparent !important;
+}
+/* 文章背景色 */
+#body-wrap {
+    background: rgb(227,226,166);
+    background: linear-gradient(185deg, rgba(227,226,166,1) 0%, rgba(0,212,255,1) 100%);
+}
