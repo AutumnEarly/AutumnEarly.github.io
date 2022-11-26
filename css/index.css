@@ -3188,6 +3188,7 @@ h1.page-title + .tag-cloud-list {
   top: 43%;
   padding: 0 10px;
   width: 100%;
+  text-align: center;
 }
 #page-header #site-title,
 #page-header #site-subtitle,

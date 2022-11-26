@@ -18,3 +18,15 @@
     background: rgb(227,226,166);
     background: linear-gradient(185deg, rgba(227,226,166,1) 0%, rgba(0,212,255,1) 100%);
 }
+#sitehh1-subtitle {
+    position: relative;
+    color: aliceblue;
+    font-size: 1.25em;
+    text-align: center;
+}
+#vertical-String {
+    position: relative;
+    color: rgba(240, 248, 255, 0.592);
+    font-size: 1.25em;
+    text-align: left;
+}

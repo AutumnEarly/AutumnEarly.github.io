@@ -1,18 +1,59 @@
 
+
 (function(){
     var footerUser = document.querySelector('#footer-wrap');
     var runtime = document.createElement('div'); //计量网站建立时间
     var noteLeft = document.createElement('div'); //留言条
     runtime.id = "runtime";
     noteLeft.innerHTML="这个网站才开始搭建，功能大部分都没有实现~";
+    var siteH1 = document.querySelector('#site-info');
+    var noteh3 = document.createElement('span');
+    var vertical = document.createElement('span');
+    vertical.innerHTML = '|';
+    noteh3.id = 'sitehh1-subtitle';
+    vertical.id = 'vertical-String';
+    var sendWord = '为了你喜欢的那个人而努力吧！即使那个人不存在于现实！';
     //初始化
     window.addEventListener('DOMContentLoaded',() => {
         footerUser.appendChild(runtime);
         footerUser.appendChild(noteLeft);
         nowRuntime();
+        siteH1.appendChild(noteh3);
+        siteH1.appendChild(vertical);
+        subtitleTiemr(noteh3,sendWord);
     })
 
-    console.log(footerUser);
+    async function subtitleTiemr(obj,text,times = 0)
+    {
+        let rand = 1;
+        rand = Math.random() * (text.length - text.length / 2) + 1;
+        obj.timerSubtitle = setTimeout(function t() {
+            obj.innerHTML += text[times];
+            times++;
+            subtitleTiemr(obj,text,times);
+            console.log("输出中~");
+        },Math.floor(1000 / rand));
+        if(times == text.length ) {
+            console.log('输出完毕~');
+            clearTimeout(obj.timerSubtitle);
+            vertical.innerHTML = '';
+            callbackST(obj,sendWord,sendWord.length);
+        }
+    }
+    async function callbackST(obj,text,i = 0) {
+        var t = text.replace(text[i],'');
+        obj.timerCallbackSt = setTimeout(async () => {
+            i--;
+            obj.innerHTML = t;
+            callbackST(obj,t,i);
+            console.log(t);
+            if( i == -1) {
+                clearTimeout(obj.timerCallbackSt);
+                blockFun(1); //卡住一秒
+            }
+        },30)
+
+    }
     //计算时间
     function nowRuntime() {
         X = new Date("11/24/2022 21:50:00");
@@ -41,5 +82,13 @@
         }
         // console.log(document.querySelector('#footer-wrap').querySelector('#runtime'));
     }
-
+    //中间阻塞函数
+    function blockFun(times) {
+        return new Promise(reslove=> { setTimeout(() => {
+            console.log('卡住%d秒',times);
+            subtitleTiemr(noteh3,sendWord);
+            //重调的时候重新加上
+            vertical.innerHTML = '|';
+        },times * 1000);});
+    }
 }(document))
