@@ -12,7 +12,7 @@
     vertical.innerHTML = '|';
     noteh3.id = 'sitehh1-subtitle';
     vertical.id = 'vertical-String';
-    var sendWord = '为了你喜欢的那个人而努力吧！即使那个人不存在于现实！';
+    var sendWord = '为了你所喜欢的东西而奋斗吧！';
     //初始化
     window.addEventListener('DOMContentLoaded',() => {
         footerUser.appendChild(runtime);
