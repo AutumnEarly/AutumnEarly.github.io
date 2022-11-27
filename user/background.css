@@ -1,8 +1,4 @@
-/* 文章页背景 */
-.layout_post>#post {
-    /* 以下代表透明度为0.5 可以自行修改*/
-    background: rgba(170, 230, 230, 0.799);
-}
+
 
 /* 所有页面背景 */
 #aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{
@@ -10,14 +6,7 @@
     background: rgba(255,255,255,.5);
 }
 
-#footer {
-    background-color: transparent !important;
-}
-/* 文章背景色 */
-#body-wrap {
-    background: rgb(227,226,166);
-    background: linear-gradient(185deg, rgba(227,226,166,1) 0%, rgba(0,212,255,1) 100%);
-}
+/* ---------------------主页副标题寄语------------------ */
 #sitehh1-subtitle {
     position: relative;
     color: aliceblue;
@@ -29,4 +18,60 @@
     color: rgba(240, 248, 255, 0.592);
     font-size: 1.25em;
     text-align: left;
+}
+/* ---------------------主页副标题寄语------------------ */
+
+/* ---------------------文章页个性化------------------ */
+#content-inner h1 {
+    border-bottom: 2px solid rgba(0,212,255,1);
+}
+#content-inner h2::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    width: 3px;
+    height: 100%;
+    background-color: aquamarine;
+}
+/* 文章页背景 */
+.layout_post>#post {
+    /* 以下代表透明度为0.5 可以自行修改*/
+    background: rgba(170, 230, 230, 0.799);
+}
+/* 文章背景色 */
+#body-wrap {
+    background: rgb(227,226,166);
+    background: linear-gradient(185deg, rgba(227,226,166,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+/* ---------------------文章页个性化------------------ */
+
+
+/* ---------------------页脚个性化------------------ */
+#footer {
+    background-color: transparent !important;
+}
+/* ---------------------页脚个性化------------------ */
+
+
+#hint {
+    position: fixed;
+    top: 5em;
+    left: -100px;
+    width: 100px;
+    height: 30px;
+    background-color: rgba(253, 193, 110, 0.056);
+    animation: hint 5s cubic-bezier(0.11, 0.74, 0.61, 1.19);
+    text-align: center;
+    font-weight: bold;
+    color:aliceblue;
+}
+#hint::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    width: 0;
+    height: 100%;
+    border-bottom: 2px solid orange;
+    animation: hint-after 5s ;
 }

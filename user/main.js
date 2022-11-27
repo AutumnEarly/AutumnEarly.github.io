@@ -4,9 +4,6 @@
     var footerUser = document.querySelector('#footer-wrap');
     var runtime = document.createElement('div'); //计量网站建立时间
     var noteLeft = document.createElement('div'); //留言条
-    runtime.id = "runtime";
-    noteLeft.innerHTML="这个网站才开始搭建，功能大部分都没有实现~";
-    var siteH1 = document.querySelector('#site-info');
     var noteh3 = document.createElement('span');
     var vertical = document.createElement('span');
     vertical.innerHTML = '|';
@@ -17,39 +14,52 @@
     window.addEventListener('DOMContentLoaded',() => {
         footerUser.appendChild(runtime);
         footerUser.appendChild(noteLeft);
+        runtime.id = "runtime";
+        noteLeft.innerHTML="这个网站才开始搭建，功能大部分都没有实现~";
         nowRuntime();
-        siteH1.appendChild(noteh3);
-        siteH1.appendChild(vertical);
         subtitleTiemr(noteh3,sendWord);
     })
-
-    async function subtitleTiemr(obj,text,times = 0)
+    window.addEventListener('load',() => {
+        setTimeout(() => {
+            hintText();
+        },1000);
+    })
+    //插入的对象 文本
+    function subtitleTiemr(obj,text,times = 0)
     {
+        if(document.querySelector('#site-info') != null) {
+            if(document.querySelector('#site-info').querySelector('#sitehh1-subtitle') === null) {
+                document.querySelector('#site-info').appendChild(noteh3);
+                document.querySelector('#site-info').appendChild(vertical);
+            }
+        }
+        
         let rand = 1;
         rand = Math.random() * (text.length - text.length / 2) + 1;
         obj.timerSubtitle = setTimeout(function t() {
             obj.innerHTML += text[times];
             times++;
             subtitleTiemr(obj,text,times);
-            console.log("输出中~");
+            // console.log("输出中~");
         },Math.floor(1000 / rand));
         if(times == text.length ) {
-            console.log('输出完毕~');
+            // console.log('输出完毕~');
             clearTimeout(obj.timerSubtitle);
             vertical.innerHTML = '';
-            callbackST(obj,sendWord,sendWord.length);
+            blockFun(1); //卡住一秒
         }
     }
-    async function callbackST(obj,text,i = 0) {
+    //插入的对象 文本 起始值
+    function callbackST(obj,text,i = 0) {
         var t = text.replace(text[i],'');
-        obj.timerCallbackSt = setTimeout(async () => {
+        obj.timerCallbackSt = setTimeout(() => {
             i--;
             obj.innerHTML = t;
             callbackST(obj,t,i);
-            console.log(t);
+            // console.log(t);
             if( i == -1) {
                 clearTimeout(obj.timerCallbackSt);
-                blockFun(1); //卡住一秒
+                subtitleTiemr(noteh3,sendWord)
             }
         },30)
 
@@ -82,13 +92,40 @@
         }
         // console.log(document.querySelector('#footer-wrap').querySelector('#runtime'));
     }
-    //中间阻塞函数
+    //中间延时函数 时间（秒）
     function blockFun(times) {
         return new Promise(reslove=> { setTimeout(() => {
-            console.log('卡住%d秒',times);
-            subtitleTiemr(noteh3,sendWord);
+            // console.log('卡住%d秒',times);
+            callbackST(noteh3,sendWord,sendWord.length);
             //重调的时候重新加上
             vertical.innerHTML = '|';
         },times * 1000);});
+    }
+    //提示文本
+    function hintText() {
+        let date = new Date();
+        let hours = date.getHours();
+
+        let hint = document.createElement('div');
+        hint.id = 'hint';
+        
+        if(hours >=6 && hours <= 10) {
+            hint.innerText = '早上好啊，新的一天就从早上开始咯~';
+            console.log('早上好啊，新的一天就从早上开始咯~');
+        } else if(hours >=11 && hours <=13) {
+            hint.innerText = '中午好啊~';
+            console.log('中午好啊');
+        } else if(hours >=14 && hours <=18) {
+            hint.innerText = '下午好啊~';
+            console.log('下午好啊');
+        } else if(hours >=19 && hours < 23) {
+            hint.innerText = '晚上好啊~';
+            console.log('晚上好啊');
+        } else {
+            hint.innerText = '夜深了，早点睡吧~';
+            console.log('夜深了，早点睡吧');
+        }
+        document.body.appendChild(hint); 
+        console.log(document.querySelector('#hint'));
     }
 }(document))
